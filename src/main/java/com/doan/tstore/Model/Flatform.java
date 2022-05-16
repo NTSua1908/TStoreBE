@@ -6,33 +6,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "game_type")
-// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class GameType {
-  
+@Table(name = "flatform")
+public class Flatform {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String name;
 
-  @ManyToMany(mappedBy = "types")
+  @OneToMany(mappedBy = "flatform")
   @JsonBackReference
   private List<Game> games;
 
-  public GameType() {
+
+  public Flatform() {
   }
 
-
-  public GameType(long id, String name, List<Game> games) {
+  public Flatform(long id, String name, List<Game> games) {
     this.id = id;
     this.name = name;
     this.games = games;
@@ -61,5 +56,4 @@ public class GameType {
   public void setGames(List<Game> games) {
     this.games = games;
   }
-
 }

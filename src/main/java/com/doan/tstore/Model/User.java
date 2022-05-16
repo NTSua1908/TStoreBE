@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -21,6 +22,7 @@ public class User {
   @Column(length = 30)
   private String email;
 
+  @JsonIgnore
   private String password;
   
   private String avatar;

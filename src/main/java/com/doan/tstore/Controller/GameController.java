@@ -3,8 +3,12 @@ package com.doan.tstore.Controller;
 import java.lang.module.ResolutionException;
 import java.util.List;
 
+import com.doan.Convertor.GameConvertor;
 import com.doan.tstore.Model.Game;
+import com.doan.tstore.Model.Image;
+import com.doan.tstore.Model.Entity.GameEntity;
 import com.doan.tstore.Repository.GameRepository;
+import com.doan.tstore.Repository.ImageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +26,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
   
   @Autowired
-  private GameRepository repository;
+  private GameRepository gameRepository;
+
+  @Autowired
+  private ImageRepository imageRepository;
+
+  // @Autowired
+  private GameConvertor gameConvertor;
 
   @GetMapping("/game")
   public List<Game> getAll() {
-    return repository.findAll();
+    return gameRepository.findAll();
   }
 
   @GetMapping("/game/{id}")
-  public ResponseEntity<Game> getEmployeeById(@PathVariable Long id) {
-    Game game = repository.findById(id).orElseThrow(() -> new ResolutionException("Id not found"));
+  public ResponseEntity<Game> getGameById(@PathVariable Long id) {
+    Game game = gameRepository.findById(id).orElseThrow(() -> new ResolutionException("Id not found"));
     return ResponseEntity.ok(game);
   }
 
   @PostMapping("/game")
-    public Game createEmployee(@RequestBody Game game) {
-        return repository.save(game);
+  public GameEntity createGame(@RequestBody GameEntity gameEntity) {
+    gameConvertor = new GameConvertor();
+    Game game = gameConvertor.toGame(gameEntity);
+    game = gameRepository.save(game);
+    gameRepository.flush();
+    // System.out.println(game.getId());
+    
+    for (String image : gameEntity.getImages()) {
+      Image img = new Image();
+      img.setImage(image);
+      Game gameImg = new Game();
+      gameImg.setId(game.getId());
+      img.setGame(gameImg);
+      
+      imageRepository.save(img);
     }
+
+    return gameEntity;
+  }
 }

@@ -9,10 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "billdetail")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class BillDetail {
   
   @Id
@@ -26,7 +29,7 @@ public class BillDetail {
 
   @ManyToOne
   @JoinColumn(name = "gameId", nullable = false, referencedColumnName = "id")
-  @JsonManagedReference
+  // @JsonManagedReference
   private Game game;
 
   private double price;

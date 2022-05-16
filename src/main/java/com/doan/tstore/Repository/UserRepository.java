@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
   @Query( "SELECT u.id as id, u.name as name," + 
-  " u.email as email, u.password as password, u.avatar as avatar, t.name as type " +
+  " u.email as email, u.avatar as avatar, t.name as type " +
   " FROM User u join UserType t ON u.userType = t.id")
   public List<UserProjection> findJoined();
 }

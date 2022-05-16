@@ -9,10 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+// import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "image")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Image {
 
   @Id
@@ -22,7 +25,6 @@ public class Image {
 
   @ManyToOne
   @JoinColumn(name = "gameId", nullable = false, referencedColumnName = "id")
-  // @JsonManagedReference
   @JsonBackReference
   private Game game;
 

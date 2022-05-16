@@ -1,42 +1,14 @@
-package com.doan.tstore.Model;
+package com.doan.tstore.Model.Entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.doan.tstore.Model.Flatform;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-// import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+public class GameEntity {
 
-@Entity
-@Table(name = "game")
-// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Game {
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-
-  @Column(length = 40)
   private String name;
-
-  @OneToMany(mappedBy = "game")
-  @JsonManagedReference
-  private List<Image> images = new ArrayList<Image>();;
 
   private String thumbnailHorizontal;
   private String thumbnailVertical;
@@ -48,59 +20,36 @@ public class Game {
   private String developer;
   private String publisher;
 
-  @ManyToOne
-  @JoinColumn(name = "providerId", nullable = false, referencedColumnName = "id")
-  @JsonManagedReference
-  private Provider provider;
+  private Long providerId;
 
+  @JsonFormat(pattern="yyyy-MM-dd")
   private Date releaseDate;
+  private long flatformId;
 
-  @ManyToMany
-  @JoinTable(name = "game_types", 
-              joinColumns = @JoinColumn(name = "game_id"),
-              inverseJoinColumns = @JoinColumn(name = "type_id"))
-  @JsonManagedReference
-  private List<GameType> types = new ArrayList<GameType>();
-
+  @JsonFormat(pattern="yyyy-MM-dd")
   private Date expirationDate;
 
-  @Column(length = 5)
   private String positiveReview;
 
-  @Column(length = 5)
   private String negativeReview;
 
-  @Column(length = 5)
   private String overallReview;
-
-  @Lob
-  @Column(columnDefinition = "TEXT")
   private String description;
-
-  @Lob
-  @Column(columnDefinition = "TEXT")
   private String content;
 
-  @OneToMany(mappedBy = "game")
-  @JsonBackReference
-  private List<Cart> lstCart;
+  private List<Long> type;
+  private List<String> images;
 
-  @OneToMany(mappedBy = "game")
-  @JsonBackReference
-  private List<BillDetail> lstBillDetails;
 
-  @ManyToOne
-  @JoinColumn(name = "flatformId", nullable = false, referencedColumnName = "id")
-  @JsonManagedReference
-  private Flatform flatform;
 
-  public Game() {
+  public GameEntity() {
   }
 
-  public Game(long id, String name, List<Image> images, String thumbnailHorizontal, String thumbnailVertical, String trailer, String banner, double price, int quantity, double discount, String developer, String publisher, Provider provider, Date releaseDate, Flatform flatform, List<GameType> types, Date expirationDate, String positiveReview, String negativeReview, String overallReview, String description, String content, List<Cart> lstCart, List<BillDetail> lstBillDetails) {
-    this.id = id;
+  public GameEntity(String name, String thumbnailHorizontal, String thumbnailVertical, String trailer, String banner,
+      double price, int quantity, double discount, String developer, String publisher, Long providerId,
+      Date releaseDate, long flatformId, Date expirationDate, String positiveReview, String negativeReview,
+      String overallReview, String description, String content, List<Long> type, List<String> images) {
     this.name = name;
-    this.images = images;
     this.thumbnailHorizontal = thumbnailHorizontal;
     this.thumbnailVertical = thumbnailVertical;
     this.trailer = trailer;
@@ -110,26 +59,17 @@ public class Game {
     this.discount = discount;
     this.developer = developer;
     this.publisher = publisher;
-    this.provider = provider;
+    this.providerId = providerId;
     this.releaseDate = releaseDate;
-    this.flatform = flatform;
-    this.types = types;
+    this.flatformId = flatformId;
     this.expirationDate = expirationDate;
     this.positiveReview = positiveReview;
     this.negativeReview = negativeReview;
     this.overallReview = overallReview;
     this.description = description;
     this.content = content;
-    this.lstCart = lstCart;
-    this.lstBillDetails = lstBillDetails;
-  }
-
-  public long getId() {
-    return this.id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
+    this.type = type;
+    this.images = images;
   }
 
   public String getName() {
@@ -138,14 +78,6 @@ public class Game {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public List<Image> getImages() {
-    return this.images;
-  }
-
-  public void setImages(List<Image> images) {
-    this.images = images;
   }
 
   public String getThumbnailHorizontal() {
@@ -220,12 +152,12 @@ public class Game {
     this.publisher = publisher;
   }
 
-  public Provider getProvider() {
-    return this.provider;
+  public Long getProviderId() {
+    return this.providerId;
   }
 
-  public void setProvider(Provider provider) {
-    this.provider = provider;
+  public void setProviderId(Long providerId) {
+    this.providerId = providerId;
   }
 
   public Date getReleaseDate() {
@@ -236,22 +168,15 @@ public class Game {
     this.releaseDate = releaseDate;
   }
 
-  public Flatform getFlatform() {
-    return this.flatform;
+  public long getFlatformId() {
+    return this.flatformId;
   }
 
-  public void setFlatform(Flatform flatform) {
-    this.flatform = flatform;
+  public void setFlatformId(long flatformId) {
+    this.flatformId = flatformId;
   }
   
-
-  public List<GameType> getTypes() {
-    return this.types;
-  }
-
-  public void setTypes(List<GameType> types) {
-    this.types = types;
-  }
+  
 
   public Date getExpirationDate() {
     return this.expirationDate;
@@ -302,24 +227,21 @@ public class Game {
   }
 
 
-  public List<Cart> getLstCart() {
-    return this.lstCart;
+  public List<Long> getType() {
+    return this.type;
   }
 
-  public void setLstCart(List<Cart> lstCart) {
-    this.lstCart = lstCart;
+  public void setType(List<Long> type) {
+    this.type = type;
   }
 
 
-  public List<BillDetail> getLstBillDetails() {
-    return this.lstBillDetails;
+  public List<String> getImages() {
+    return this.images;
   }
 
-  public void setLstBillDetails(List<BillDetail> lstBillDetails) {
-    this.lstBillDetails = lstBillDetails;
+  public void setImages(List<String> images) {
+    this.images = images;
   }
-  
-
-  
 
 }
