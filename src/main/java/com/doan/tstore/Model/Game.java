@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 // import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -36,7 +37,7 @@ public class Game {
 
   @OneToMany(mappedBy = "game")
   @JsonManagedReference
-  private List<Image> images = new ArrayList<Image>();;
+  private List<Image> images = new ArrayList<Image>();
 
   private String thumbnailHorizontal;
   private String thumbnailVertical;
@@ -93,6 +94,11 @@ public class Game {
   @JoinColumn(name = "flatformId", nullable = false, referencedColumnName = "id")
   @JsonManagedReference
   private Flatform flatform;
+
+  @OneToMany(mappedBy = "game")
+  // @JsonBackReference
+  @JsonIgnore
+  private List<History> history;
 
   public Game() {
   }
@@ -319,6 +325,14 @@ public class Game {
     this.lstBillDetails = lstBillDetails;
   }
   
+
+  public List<History> getHistory() {
+    return this.history;
+  }
+
+  public void setHistory(List<History> history) {
+    this.history = history;
+  }
 
   
 

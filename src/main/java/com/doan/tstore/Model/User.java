@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "user")
-
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +35,9 @@ public class User {
   @JsonBackReference
   private List<Bill> lstBills;
 
-  
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<History> histories;
 
   public User() {
   }
@@ -105,6 +106,14 @@ public class User {
 
   public void setLstBills(List<Bill> lstBills) {
     this.lstBills = lstBills;
+  }
+
+  public List<History> getHistories() {
+    return this.histories;
+  }
+
+  public void setHistories(List<History> histories) {
+    this.histories = histories;
   }
 
 }
