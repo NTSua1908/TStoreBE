@@ -1,5 +1,16 @@
 package com.doan.tstore;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import com.doan.tstore.Model.User;
+import com.doan.tstore.Model.UserType;
+import com.doan.tstore.Repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 // import java.io.Console;
 
 // import com.doan.tstore.Model.Game;
@@ -10,26 +21,34 @@ package com.doan.tstore;
 // import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class TstoreApplication {
 
+	// @Autowired
+	// private PasswordEncoder passwordEncoder;
+	
+	// @Autowired
+	// private UserRepository userRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(TstoreApplication.class, args);
-		
-		// try {
-		// 	Game game = new ObjectMapper().readValue(
-		// 			"{\"id\":1,\"name\":\"\",\"images\":null,\"thumbnailHorizontal\":\"\",\"thumbnailVertical\":\"\",\"trailer\":\"\",\"banner\":\"\",\"price\":10,\"quantity\":10,\"discount\":5,\"developer\":\"\",\"publisher\":\"\",\"provider\":null,\"releaseDate\":\"2022-5-12\",\"flatform\":\"PlayStation 5\",\"types\":null,\"expirationDate\":\"2022-5-12\",\"positiveReview\":\"1\",\"negativeReview\":\"2\",\"overallReview\":\"3\",\"description\":\"\",\"content\":\"\",\"lstCart\":null,\"lstBillDetails\":null}",
-		// 			Game.class);
-		// 			System.out.println(game.toString());
-		// } catch (JsonMappingException e) {
-		// 	// TODO Auto-generated catch block
-		// 	e.printStackTrace();
-		// } catch (JsonProcessingException e) {
-		// 	// TODO Auto-generated catch block
-		// 	e.printStackTrace();
-		// }
-
 	}
+
+	// @PostConstruct
+	// protected void init() {
+		
+	// 	User user = new User();
+		
+	// 	user.setEmail("sua@gmail.com");
+	// 	user.setPassword(passwordEncoder.encode("123123"));
+	// 	UserType type = new UserType();
+	// 	type.setId(1);
+	// 	user.setUserType(type);
+		
+	// 	userRepository.save(user);
+		
+	// }
 
 }

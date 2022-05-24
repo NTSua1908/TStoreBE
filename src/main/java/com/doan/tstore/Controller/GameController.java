@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.doan.Convertor.GameConvertor;
+import com.doan.tstore.Convertor.GameConvertor;
 import com.doan.tstore.Model.Game;
 import com.doan.tstore.Model.Image;
 import com.doan.tstore.Model.Entity.GameEntity;

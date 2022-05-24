@@ -15,5 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
   " u.email as email, u.avatar as avatar, t.name as type " +
   " FROM User u join UserType t ON u.userType = t.id")
   public List<UserProjection> findJoined();
+
+  User findOneByEmail(String email);
 }
 

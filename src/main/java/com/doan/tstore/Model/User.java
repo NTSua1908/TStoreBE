@@ -116,4 +116,20 @@ public class User {
     this.histories = histories;
   }
 
+
+  @Override
+  public String toString() {
+    return "{" +
+      " id='" + getId() + "'" +
+      ", name='" + getName() + "'" +
+      ", email='" + getEmail() + "'" +
+      ", password='" + getPassword() + "'" +
+      ", avatar='" + getAvatar() + "'" +
+      ", userType='" + getUserType() + "'" +
+      ", lstBills='" + getLstBills() + "'" +
+      ", histories='" + getHistories() + "'" +
+      "}";
+  }
+
+
 }

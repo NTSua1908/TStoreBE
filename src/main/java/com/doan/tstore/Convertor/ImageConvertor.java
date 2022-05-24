@@ -1,4 +1,4 @@
-package com.doan.Convertor;
+package com.doan.tstore.Convertor;
 
 import com.doan.tstore.Model.Game;
 import com.doan.tstore.Model.Image;

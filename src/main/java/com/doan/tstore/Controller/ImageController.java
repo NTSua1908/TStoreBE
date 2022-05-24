@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import com.doan.Convertor.ImageConvertor;
+import com.doan.tstore.Convertor.ImageConvertor;
 import com.doan.tstore.Model.Image;
 import com.doan.tstore.Model.Entity.ImageEntity;
 import com.doan.tstore.Repository.ImageRepository;
